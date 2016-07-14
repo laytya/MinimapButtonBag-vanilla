@@ -27,7 +27,7 @@ Use Right click on the MinimapButtonBag button to open the options dialog.
 
 /mbb reset all - resets the MBB settings
 
-#Basic install instructions
+# Basic install instructions
   - Extract the archive
   - Rename the "MinimapButtonBag-vanilla-master" folder to "MBB" and copy into your "<WOW FOLDER>/Interface/Addons/" directory
   
