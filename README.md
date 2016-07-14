@@ -20,6 +20,9 @@ Use Right click on the MinimapButtonBag button to open the options dialog.
 # Slash Commands
 
 /mbb - shows the MBB commands
+
 /mbb buttons - shows a list of all rfames in the MBB bar
+
 /mbb reset position - resets the position of the MBB button
+
 /mbb reset all - resets the MBB settings
