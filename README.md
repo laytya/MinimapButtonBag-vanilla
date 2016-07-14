@@ -17,6 +17,10 @@ Or hold the Ctrl key down and move the mouse cursor over the button. A button to
 
 Use Right click on the MinimapButtonBag button to open the options dialog.
 
+# Download
+#<a href="https://github.com/laytya/MinimapButtonBag-vanilla/releases/latest">Download HERE</a>
+
+
 # Slash Commands
 
 /mbb - shows the MBB commands
