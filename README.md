@@ -26,3 +26,11 @@ Use Right click on the MinimapButtonBag button to open the options dialog.
 /mbb reset position - resets the position of the MBB button
 
 /mbb reset all - resets the MBB settings
+
+#Basic install instructions
+  - Extract the archive
+  - Rename the "!Questie" folder into your "<WOW FOLDER>/Interface/Addons/" directory
+    * NOTE * It should be beside several folders that start with "Blizzard_"
+  - Log into the game and verify Questie is loaded by going into the addon menu (Bottom left of the screen)
+    * NOTE * It is recommended that you increase the addon memory limit (top right of the window)
+    The default value for vanilla is very low and may cause problems if you use questie with other addons
