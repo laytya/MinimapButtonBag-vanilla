@@ -9,3 +9,10 @@ I started new trank from original addon MBB by Tunhadil for vanilla wow servers.
 
 +Added some functionality.
 
+If you want to reattach a button to the minimap just use Ctrl + Right click on it.
+
+Use Ctrl + Right click again on the button to put it back into the bar.
+
+Or hold the Ctrl key down and move the mouse cursor over the button. A button to add or remove will appear over that button.
+
+Use Right click on the MinimapButtonBag button to open the options dialog.
