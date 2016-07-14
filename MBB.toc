@@ -6,4 +6,5 @@
 ## SavedVariablesPerCharacter: MBB_Exclude, MBB_Options
 localization-enGB.lua
 localization-deDE.lua
+localization-ruRU.lua
 MBB.xml
