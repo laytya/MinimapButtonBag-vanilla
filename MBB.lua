@@ -1,4 +1,4 @@
-MBB_Version = "0.501";
+MBB_Version = "0.502";
 MBB_DebugFlag = 0;
 MBB_DragFlag = 0;
 MBB_ShowTimeout = -1;
@@ -14,8 +14,8 @@ MBB_DefaultOptions = {
 };
 
 MBB_Include = {
-	[1] = "WIM_IconFrame",
-	[2] = "DPSMate_MiniMap"
+	[1] = "DPSMate_MiniMap"
+	--[2] = "WIM_IconFrame",
 };
 
 MBB_Ignore = {
@@ -46,8 +46,8 @@ MBB_IgnoreSize = {
 	[4] = "STC_SoulstoneButton",
 	[5] = "STC_SpellstoneButton",
 	[6] = "STC_FirestoneButton",
-	[7] = "WIM_IconFrameButton",
-	[8] = "MonkeyBuddyIconButton"
+--	[7] = "WIM_IconFrameButton",
+	[7] = "MonkeyBuddyIconButton"
 };
 
 MBB_ExtraSize = {
