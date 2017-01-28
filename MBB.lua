@@ -574,7 +574,7 @@ function MBB_ResetPosition()
 end
 
 function MBB_SetButtonPosition()
-	
+	if (not MBB_Options) then return; end
 	MBB_MinimapButtonFrame:SetScale(1/Minimap:GetEffectiveScale());
 	
 	--MBB_Debug(MBB_Options.ButtonPos[1].." " .. MBB_Options.ButtonPos[2])
