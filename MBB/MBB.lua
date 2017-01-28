@@ -1,5 +1,5 @@
 MBB_Version = GetAddOnMetadata("MBB", "Version");
-MBB_DebugFlag = 1;
+MBB_DebugFlag = 0;
 MBB_DragFlag = 0;
 MBB_ShowTimeout = -1;
 MBB_Buttons = {};
