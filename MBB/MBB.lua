@@ -14,8 +14,7 @@ MBB_DefaultOptions = {
 };
 
 MBB_Include = {
-	[1] = "DPSMate_MiniMap"
-	--[2] = "WIM_IconFrame",
+
 };
 
 MBB_Ignore = {
