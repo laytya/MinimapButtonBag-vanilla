@@ -1,4 +1,4 @@
-MBB_Version = "0.502";
+MBB_Version = GetAddOnMetadata("MBB", "Version");
 MBB_DebugFlag = 0;
 MBB_DragFlag = 0;
 MBB_ShowTimeout = -1;
