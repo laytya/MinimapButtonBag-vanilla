@@ -29,6 +29,7 @@ v0.503
 + Moved to folder "MBB" to easy install (need to exit WOW if you upgrading to this version)
 + Changed from Drag to Shift-Drag to move MBB button.
 + More compatibility w/ simpleMinimap
++ Fix DPS_Mate errors
 
 v0.502
 
