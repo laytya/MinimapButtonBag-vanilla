@@ -10,11 +10,12 @@ MBB_DefaultOptions = {
 	["CollapseTimeout"] = 1,
 	["ExpandDirection"] = 1,
 	["MaxButtonsPerLine"] = 0,
-	["AltExpandDirection"] = 4
+	["AltExpandDirection"] = 4,
+	["Version"] = MBB_Version
 };
 
 MBB_Include = {
-
+	
 };
 
 MBB_Ignore = {
@@ -48,6 +49,21 @@ MBB_IgnoreSize = {
 --	[7] = "WIM_IconFrameButton",
 	[7] = "MonkeyBuddyIconButton"
 };
+
+--Code by Grayhoof (SCT)
+local function CloneTable(t)				-- return a copy of the table t
+	local new = {};					-- create a new table
+	local i, v = next(t, nil);		-- i is an index of t, v = t[i]
+	while i do
+		if type(v)=="table" then 
+			v=CloneTable(v);
+		end 
+		new[i] = v;
+		i, v = next(t, i);			-- get next index
+	end
+	return new;
+end
+
 
 MBB_ExtraSize = {
 	["GathererMinimapButton"] = function()
@@ -112,9 +128,7 @@ function MBB_SlashHandler(cmd)
 	elseif( cmd == "reset position" ) then
 		MBB_ResetPosition();
 	elseif( cmd == "reset all" ) then
-		for opt,val in pairs(MBB_DefaultOptions) do
-			MBB_Options[opt] = val;
-		end
+		MBB_Options = CloneTable(MBB_DefaultOptions);
 		for i=1,table.getn(MBB_Exclude) do
 			MBB_AddButton(MBB_Exclude[1]);
 		end
@@ -175,25 +189,12 @@ end
 
 function MBB_OnEvent()
 	if(event == "ADDON_LOADED" and (arg1 == "Squeenix" or arg1 == "MBB")) then
-	
-		
 		MBB_SetButtonPosition();
 	end
 	if ( event == "VARIABLES_LOADED" ) then
-		
-			for opt,val in pairs(MBB_DefaultOptions) do
-				if( not MBB_Options or not MBB_Options[opt] ) then
-					MBB_Debug(opt .. " option set to default: " .. tostring(val));
-					MBB_Options[opt] = val;
-				else
-					MBB_Debug(opt .. " option exists: " .. tostring(MBB_Options[opt]));
-				end
-			end
-		
-		
-		
-		
-		
+		if ( MBB_Options == nil or MBB_Options["Version"] ~= MBB_Version)  then
+			MBB_Options = CloneTable(MBB_DefaultOptions)
+		end
 	end
 end
 
@@ -565,15 +566,12 @@ function MBB_ResetPosition()
 	MBB_Options.ButtonPos[1] = MBB_DefaultOptions.ButtonPos[1];
 	MBB_Options.ButtonPos[2] = MBB_DefaultOptions.ButtonPos[2];
 	MBB_Options.AttachToMinimap = MBB_DefaultOptions.AttachToMinimap;
-	
 	MBB_SetButtonPosition();
 end
 
 function MBB_SetButtonPosition()
 	if (not MBB_Options) then MBB_Debug("NO MBB_Options");return; end
 	MBB_MinimapButtonFrame:SetScale(1/Minimap:GetEffectiveScale());
-	
-	
 	if( MBB_Options.AttachToMinimap == 1 ) then
 		MBB_MinimapButtonFrame:ClearAllPoints();
 		MBB_MinimapButtonFrame:SetPoint("TOPLEFT", Minimap, "TOPLEFT", MBB_Options.ButtonPos[1], MBB_Options.ButtonPos[2]);
