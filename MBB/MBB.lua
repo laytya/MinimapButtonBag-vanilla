@@ -575,7 +575,7 @@ end
 
 function MBB_SetButtonPosition()
 	if (not MBB_Options) then MBB_Debug("NO MBB_Options");return; end
-	MBB_MinimapButtonFrame:SetScale(MBB_Options.Scale* (1/Minimap:GetEffectiveScale())/100);
+MBB_MinimapButtonFrame:SetScale((MBB_Options.Scale or 100 ) * (1/Minimap:GetEffectiveScale())/100);
 	if( MBB_Options.AttachToMinimap == 1 ) then
 		MBB_MinimapButtonFrame:ClearAllPoints();
 		MBB_MinimapButtonFrame:SetPoint("TOPLEFT", Minimap, "TOPLEFT", MBB_Options.ButtonPos[1], MBB_Options.ButtonPos[2]);
