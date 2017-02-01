@@ -550,7 +550,8 @@ function MBB_OnUpdate(elapsed)
 			x= cos(angle)*xdelta
 			y= sin(angle)*ydelta
 		end
-		MBB_MinimapButtonFrame:SetPoint("TOPLEFT", Minimap, "TOPLEFT", xdelta-x -17 , y-ydelta +17);
+		local sc= MBB_Options.Scale/100
+		MBB_MinimapButtonFrame:SetPoint("TOPLEFT", Minimap, "TOPLEFT", (xdelta-x)/sc -17 , (y-ydelta)/sc +17);
 	end
 	
 	if( MBB_Options.CollapseTimeout and MBB_Options.CollapseTimeout ~= 0 ) then
