@@ -23,6 +23,18 @@ Use Right click on the MinimapButtonBag button to open the options dialog.
 
 #Last changes
 
+v0.505
+
++ Added button's scale option
+
+v0.504
+
++ More fix for #3
+
+v0.503a
+
++ Fix errors DPS_mate #2
+
 v0.503
 
 + Fix for #3
