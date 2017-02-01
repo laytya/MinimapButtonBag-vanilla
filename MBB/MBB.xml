@@ -109,7 +109,7 @@
 	
 	<Frame name="MBB_OptionsFrame" toplevel="true" enableMouse="true" movable="true" parent="UIParent" hidden="true">
 		<Size>
-			<AbsDimension x="300" y="290" />
+			<AbsDimension x="300" y="330" />
 		</Size>
 		<Anchors>
 			<Anchor point="CENTER" />
@@ -600,14 +600,58 @@
 					</OnShow>
 				</Scripts>
 			</CheckButton>
+												<Slider name="$parent_Scale" inherits="OptionsSliderTemplate">
+				<Anchors>
+					<Anchor point="TOP" relativeTo="$parent_BottomAltRadio" relativePoint="BOTTOM">
+						<Offset>
+							<AbsDimension x="55" y="-20" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer level="ARTWORK">
+						<FontString name="$parentLabel" inherits="GameFontHighlight" justifyH="LEFT" text="MBB_OPTIONS_SCALE">
+							<Size>
+								<AbsDimension x="125" y="15" />
+							</Size>
+							<Anchors>
+								<Anchor point="RIGHT" relativePoint="LEFT">
+									<Offset>
+										<AbsDimension x="0" y="0" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnValueChanged>
+						getglobal(this:GetName().."Text"):SetText(this:GetValue() .. "%");
+						MBB_Options.Scale = MBB_OptionsFrame_Scale:GetValue();
+						MBB_SetPositions();
+						MBB_SetButtonPosition();
+					</OnValueChanged>
+					<OnLoad>
+						this:SetMinMaxValues(50,150);
+						this:SetValueStep(1);
+						getglobal(this:GetName().."High"):SetText("150%");
+						getglobal(this:GetName().."Low"):SetText("50%");
+					</OnLoad>
+					<OnShow>
+						this:SetValue(MBB_Options.Scale);
+						getglobal(this:GetName().."Text"):SetText(this:GetValue() .. "%");
+					</OnShow>
+				</Scripts>
+			</Slider>
+			
 			<Button name="$parent_OKButton" inherits="UIPanelButtonTemplate" text="MBB_OPTIONS_OKBUTTON">
 				<Size>
 					<AbsDimension x="125" y="21" />
 				</Size>
 				<Anchors>
-					<Anchor point="TOP" relativeTo="$parent" relativeFrom="TOPLEFT">
+					<Anchor point="BOTTOMLEFT" relativeTo="$parent" relativeFrom="BOTTOMLEFT">
 						<Offset>
-							<AbsDimension x="-75" y="-245" />
+							<AbsDimension x="20" y="15" />
 						</Offset>
 					</Anchor>
 				</Anchors>
@@ -615,6 +659,7 @@
 					<OnClick>
 						MBB_OptionsFrame:Hide();
 						MBB_Options.CollapseTimeout = MBB_OptionsFrame_TimeoutSlider:GetValue();
+						MBB_Options.Scale = MBB_OptionsFrame_Scale:GetValue();
 						if( MBB_OptionsFrame_LeftRadio:GetChecked() ) then
 							MBB_Options.ExpandDirection = 1;
 						elseif( MBB_OptionsFrame_TopRadio:GetChecked() ) then
@@ -637,6 +682,7 @@
 							MBB_Options.AltExpandDirection = 4;
 						end
 						MBB_SetPositions();
+						MBB_SetButtonPosition();
 					</OnClick>
 				</Scripts>
 			</Button>
@@ -645,9 +691,9 @@
 					<AbsDimension x="125" y="21" />
 				</Size>
 				<Anchors>
-					<Anchor point="TOP" relativeTo="$parent" relativeFrom="TOPLEFT">
+					<Anchor point="LEFT" relativeTo="$parent_OKButton" relativeFrom="LEFT">
 						<Offset>
-							<AbsDimension x="75" y="-245" />
+							<AbsDimension x="130" y="0" />
 						</Offset>
 					</Anchor>
 				</Anchors>

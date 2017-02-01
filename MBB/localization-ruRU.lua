@@ -14,6 +14,7 @@ if( GetLocale() == "ruRU" ) then
 	MBB_OPTIONS_MAXBUTTONSLABEL = "Max. кнопок на строку:";
 	MBB_OPTIONS_MAXBUTTONSINFO = "(0=бесконечно)";
 	MBB_OPTIONS_ALTEXPANSIONLABEL = "Расширять строки в:";
+	MBB_OPTIONS_SCALE="Масштаб кнопок";
 	MBB_HELP1 = "Напечатайте \"/mbb <cmd>\" где <cmd> есть одна из команд:";
 	MBB_HELP2 = "  |c00ffffffbuttons|r: Показать список всех кнопок в MBB";
 	MBB_HELP3 = "  |c00ffffffreset position|r: Сбросить позицию кнопки МBB у миникарты";

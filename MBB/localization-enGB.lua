@@ -13,6 +13,7 @@ MBB_OPTIONS_EXPANSIONBOTTOM = "Bottom";
 MBB_OPTIONS_MAXBUTTONSLABEL = "Max. Buttons/Line:";
 MBB_OPTIONS_MAXBUTTONSINFO = "(0=infinity)";
 MBB_OPTIONS_ALTEXPANSIONLABEL = "Alt. Expand to:";
+MBB_OPTIONS_SCALE="Button's scale";
 MBB_HELP1 = "Type \"/mbb <cmd>\" where <cmd> is one of the following:";
 MBB_HELP2 = "  |c00ffffffbuttons|r: Shows a list of all frames in the MBB bar";
 MBB_HELP3 = "  |c00ffffffreset position|r: resets the position of the MBB minimap button";

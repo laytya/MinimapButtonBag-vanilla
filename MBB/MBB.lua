@@ -11,6 +11,7 @@ MBB_DefaultOptions = {
 	["ExpandDirection"] = 1,
 	["MaxButtonsPerLine"] = 0,
 	["AltExpandDirection"] = 4,
+	["Scale"] = 100,
 	["Version"] = MBB_Version
 };
 
@@ -35,7 +36,8 @@ MBB_Ignore = {
 	[14] = "FWGMinimapPOI",
 	[15] = "MBB_MinimapButtonFrame",
 	[16] = "QuestieNote",
-	[17] = "MetaMap"
+	[17] = "MetaMap",
+	[18] = "LootLinkMinimapButton"
 	
 };
 
@@ -268,7 +270,7 @@ function MBB_PrepareButton(name)
 		end
 		
 		if( not MBB_IsInArray(MBB_IgnoreSize, name) ) then
-			frame:SetScale(1/Minimap:GetEffectiveScale());
+			frame:SetScale(MBB_Options.Scale * (1/Minimap:GetEffectiveScale())/100);
 		end
 		frame.isvisible = frame:IsVisible();
 		frame.oshow = frame.Show;
@@ -458,6 +460,7 @@ function MBB_SetPositions()
 				else
 					frame:SetHeight(31); -- 33
 					frame:SetWidth(31);
+					frame:SetScale(MBB_Options.Scale * (1/Minimap:GetEffectiveScale())/100);
 				end
 			end
 			
@@ -571,7 +574,7 @@ end
 
 function MBB_SetButtonPosition()
 	if (not MBB_Options) then MBB_Debug("NO MBB_Options");return; end
-	MBB_MinimapButtonFrame:SetScale(1/Minimap:GetEffectiveScale());
+	MBB_MinimapButtonFrame:SetScale(MBB_Options.Scale* (1/Minimap:GetEffectiveScale())/100);
 	if( MBB_Options.AttachToMinimap == 1 ) then
 		MBB_MinimapButtonFrame:ClearAllPoints();
 		MBB_MinimapButtonFrame:SetPoint("TOPLEFT", Minimap, "TOPLEFT", MBB_Options.ButtonPos[1], MBB_Options.ButtonPos[2]);
