@@ -79,6 +79,7 @@
 			<OnDragStart>
 				if (IsShiftKeyDown()) then
 					GameTooltip:Hide();
+					MBB_ShowTimeout = 0;
 					if( MBB_Options.AttachToMinimap == 1 ) then
 						MBB_DragFlag = 1;
 					else

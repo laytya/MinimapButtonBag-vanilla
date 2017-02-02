@@ -419,6 +419,12 @@ function MBB_RestoreButton(name)
 	end
 end
 
+local function ResizeButton(frame)
+	frame:SetHeight(31); 
+	frame:SetWidth(31);
+	frame:SetScale(MBB_Options.Scale * (1/Minimap:GetEffectiveScale())/100);
+end
+
 function MBB_SetPositions()
 	local directions = {
 		[1] = {"RIGHT", "LEFT"},
@@ -458,9 +464,7 @@ function MBB_SetPositions()
 					local func = MBB_ExtraSize[name];
 					func();
 				else
-					frame:SetHeight(31); -- 33
-					frame:SetWidth(31);
-					frame:SetScale(MBB_Options.Scale * (1/Minimap:GetEffectiveScale())/100);
+					ResizeButton(frame);
 				end
 			end
 			
@@ -529,9 +533,7 @@ function MBB_OnUpdate(elapsed)
 	if( MBB_DragFlag == 1 and MBB_Options.AttachToMinimap == 1 ) then
 		local xpos,ypos = GetCursorPosition();
 		local xmin,ymin,xm,ym = Minimap:GetLeft(), Minimap:GetBottom(), Minimap:GetRight(), Minimap:GetTop();
-		
 		local scale = Minimap:GetEffectiveScale();
-		
 		local xdelta, ydelta = (xm - xmin)/2*scale, (ym - ymin) /2 * scale;
 		
 		MBB_Debug( xmin..","..ymin..","..xm..","..ym)
