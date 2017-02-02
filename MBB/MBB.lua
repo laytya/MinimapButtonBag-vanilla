@@ -543,7 +543,8 @@ function MBB_OnUpdate(elapsed)
 		local angle = math.deg(math.atan2(ypos,xpos));
 		
 		local	x,y =0,0;
-		if (Squeenix or (simpleMinimap_Skins and simpleMinimap_Skins:GetShape() == "square")) then
+		if (Squeenix or (simpleMinimap_Skins and simpleMinimap_Skins:GetShape() == "square")
+		    or (pfUI and pfUI_config["disabled"]["minimap"] ~= "1")) then
 			x = math.max(-xdelta, math.min((xdelta*1.5) * cos(angle), xdelta))
 			y = math.max(-ydelta, math.min((ydelta*1.5) * sin(angle), ydelta))
 		else
