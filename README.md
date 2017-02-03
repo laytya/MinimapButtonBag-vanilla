@@ -23,6 +23,13 @@ Use Right click on the MinimapButtonBag button to open the options dialog.
 
 #Last changes
 
+v0.506
+
++ Startup gathering  fixed
++ Added Callbacks for unusual addon buttons
++ More support for RecipeRadar
++ fixed positional bugs of main button #5
+
 v0.505
 
 + Added button's scale option

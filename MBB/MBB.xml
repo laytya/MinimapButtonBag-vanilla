@@ -77,30 +77,10 @@
 				GameTooltip:Hide();
 			</OnLeave>
 			<OnDragStart>
-				if (IsShiftKeyDown()) then
-					GameTooltip:Hide();
-					MBB_ShowTimeout = 0;
-					if( MBB_Options.AttachToMinimap == 1 ) then
-						MBB_DragFlag = 1;
-					else
-						this:StartMoving();
-					end
-				end
+				MBB_DragStart();
 			</OnDragStart>
 			<OnDragStop>
-				
-				if( MBB_Options.AttachToMinimap == 1 ) then
-					MBB_DragFlag = 0;
-					local _,_,_,xpos,ypos = this:GetPoint();
-					MBB_Options.ButtonPos = {xpos,ypos};
-				else
-					this:StopMovingOrSizing();
-					local xpos,ypos = GetCursorPosition();
-					MBB_Options.ButtonPos = {xpos,ypos};
-				end
-				
-				
-				
+				MBB_DragStop();
 			</OnDragStop>
 			<OnUpdate>
 				MBB_OnUpdate(arg1);

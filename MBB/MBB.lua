@@ -4,6 +4,10 @@ MBB_DragFlag = 0;
 MBB_ShowTimeout = -1;
 MBB_Buttons = {};
 MBB_Exclude = {};
+MBB_DragPos ={
+["orig"] = {},
+["start"] = {}
+};
 MBB_DefaultOptions = {
 	["ButtonPos"] = {-18, -100},
 	["AttachToMinimap"] = 1,
@@ -80,8 +84,15 @@ MBB_ExtraSize = {
 	end
 };
 
+MBB_CallBack = {
+	["RecipeRadarMinimapButton"] = function()
+		RecipeRadar_MinimapButton_UpdatePosition();
+	end
+}
+
+
 _rescanned = false;
-_starttime = 0;
+_starttime = GetTime();
 
 function MBB_OnLoad()
 	this:RegisterEvent("VARIABLES_LOADED");
@@ -362,6 +373,14 @@ function MBB_PrepareButton(name)
 				end
 			end);
 		end
+		
+		if MBB_CallBack[name] then
+			
+			MBB_Debug("Calling callback: ".. name)
+			local func = MBB_CallBack[name];
+			func();
+		end
+		
 	end
 end
 
@@ -486,10 +505,11 @@ function MBB_OnClick(arg1)
 	if( arg1 and arg1 == "RightButton" and IsControlKeyDown() ) then
 		if( MBB_Options.AttachToMinimap == 1 ) then
 			local xpos,ypos = GetCursorPosition();
-			local scale = Minimap:GetEffectiveScale();--UIParent:GetEffectiveScale(); --GetCVar("uiScale");
+			local scale = MBB_Options.Scale/100;--UIParent:GetEffectiveScale(); --GetCVar("uiScale");
+			MBB_Debug("cursor "..(xpos).." "..(ypos))
 			MBB_Options.AttachToMinimap = 0;
-			MBB_Options.ButtonPos ={xpos,ypos} --{(xpos/scale)-10, (ypos/scale)-10}
-			MBB_Debug(" "..(xpos/scale-10).." "..(ypos/scale-10))
+			MBB_Options.ButtonPos ={xpos/scale ,ypos/scale } --{(xpos/scale)-10, (ypos/scale)-10}
+			MBB_Debug("position "..(xpos/scale ).." "..(ypos/scale ))
 			--(xpos/scale)-10, (ypos/scale)-10};
 			MBB_SetButtonPosition();
 		else
@@ -510,6 +530,51 @@ function MBB_OnClick(arg1)
 	end
 end
 
+function MBB_DragStart()
+	if (IsShiftKeyDown()) then
+		GameTooltip:Hide();
+		MBB_ShowTimeout = 0;
+		MBB_DragFlag = 1;
+		if( MBB_Options.AttachToMinimap == 1 ) then
+			
+		else
+			local _,_,_,xpos,ypos = this:GetPoint();
+			MBB_DragPos["orig"] = {xpos, ypos};
+			MBB_Debug("orig "..(MBB_DragPos.orig[1]).." "..(MBB_DragPos.orig[2]))
+			this:StartMoving();
+			_,_,_,xpos,ypos = this:GetPoint();
+			MBB_DragPos["start"]= {xpos, ypos};
+			MBB_Debug("start "..(MBB_DragPos.start[1]).." "..(MBB_DragPos.start[2]))
+		end
+	else
+		MBB_DragFlag = 0;
+	end 
+	
+end
+
+function MBB_DragStop()
+	if MBB_DragFlag == 1 then 
+		local _,_,_,xpos,ypos = this:GetPoint();
+		MBB_Debug("stop "..(xpos).." "..(ypos))
+		if( MBB_Options.AttachToMinimap == 1 ) then
+			
+			
+			MBB_Options.ButtonPos = {xpos,ypos};
+		else
+			this:StopMovingOrSizing();
+			
+	--		local xpos,ypos = GetCursorPosition();
+	--		local scale = MBB_Options.Scale/100;
+	--		MBB_Options.ButtonPos ={xpos/scale ,ypos/scale }
+			xpos = MBB_DragPos.orig[1] + (xpos - MBB_DragPos.start[1])
+			ypos = MBB_DragPos.orig[2] + (ypos - MBB_DragPos.start[2])
+			MBB_Options.ButtonPos ={xpos ,ypos }
+			MBB_Debug("options "..(MBB_Options.ButtonPos[1]).." "..(MBB_Options.ButtonPos[2]))
+		end
+		MBB_DragFlag = 0;
+	end
+end
+
 function MBB_HideButtons()
 	MBB_ShowTimeout = -1;
 	for i,name in ipairs(MBB_Buttons) do
@@ -520,15 +585,12 @@ end
 
 function MBB_OnUpdate(elapsed)
 	
-	if (not _rescanned) then
-		if ((GetTime() - _starttime) > 10) then
+	if (not _rescanned and (GetTime() - _starttime) > 5) then
 			_rescanned = true;
 			MBB_GatherIcons();
 			MBB_SetButtonPosition();
 			return;	
 		end;
-	end;
-	
 	
 	if( MBB_DragFlag == 1 and MBB_Options.AttachToMinimap == 1 ) then
 		local xpos,ypos = GetCursorPosition();
@@ -578,7 +640,7 @@ end
 
 function MBB_SetButtonPosition()
 	if (not MBB_Options) then MBB_Debug("NO MBB_Options");return; end
-MBB_MinimapButtonFrame:SetScale((MBB_Options.Scale or 100 ) * (1/Minimap:GetEffectiveScale())/100);
+	MBB_MinimapButtonFrame:SetScale((MBB_Options.Scale or 100 ) * (1/Minimap:GetEffectiveScale())/100);
 	if( MBB_Options.AttachToMinimap == 1 ) then
 		MBB_MinimapButtonFrame:ClearAllPoints();
 		MBB_MinimapButtonFrame:SetPoint("TOPLEFT", Minimap, "TOPLEFT", MBB_Options.ButtonPos[1], MBB_Options.ButtonPos[2]);
