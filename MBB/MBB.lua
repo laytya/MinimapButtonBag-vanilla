@@ -41,8 +41,8 @@ MBB_Ignore = {
 	[15] = "MBB_MinimapButtonFrame",
 	[16] = "QuestieNote",
 	[17] = "MetaMap",
-	[18] = "LootLinkMinimapButton"
-	
+	[18] = "LootLinkMinimapButton",
+	[19] = "TimeManagerClockButton"
 };
 
 MBB_IgnoreSize = {
@@ -429,7 +429,11 @@ function MBB_RestoreButton(name)
 	button:SetWidth(button.osize[1]);
 	button.ClearAllPoints = button.oclearallpoints;
 	button.SetPoint = button.osetpoint;
+	if (button.isvisible) then
 	button.oshow(button);
+	else
+		button.ohide(button);
+	end
 	
 	table.insert(MBB_Exclude, name);
 	local i = MBB_IsInArray(MBB_Buttons, button:GetName());
@@ -523,7 +527,7 @@ function MBB_OnClick(arg1)
 		else
 			for i,name in ipairs(MBB_Buttons) do
 				local frame = getglobal(name);
-				frame.oshow(frame);
+				if frame.isvisible then frame.oshow(frame); end
 			end
 			--MBB_ShowTimeout = 0;
 		end

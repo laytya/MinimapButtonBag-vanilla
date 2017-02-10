@@ -23,6 +23,12 @@ Use Right click on the MinimapButtonBag button to open the options dialog.
 
 #Last changes
 
+v0.507
+
++ RUru localization fixed #6 thanks @Artur91425
++ Fixed #3 
++ Added TimeManagerClock to ignore list
+
 v0.506
 
 + Startup gathering  fixed
