@@ -20,7 +20,7 @@ MBB_DefaultOptions = {
 };
 
 MBB_Include = {
-	
+	[1] = "DPSMate_MiniMap",
 };
 
 MBB_Ignore = {
@@ -52,8 +52,6 @@ MBB_IgnoreSize = {
 	[4] = "STC_SoulstoneButton",
 	[5] = "STC_SpellstoneButton",
 	[6] = "STC_FirestoneButton",
---	[7] = "WIM_IconFrameButton",
-	[7] = "MonkeyBuddyIconButton"
 };
 
 --Code by Grayhoof (SCT)
@@ -80,7 +78,11 @@ MBB_ExtraSize = {
 		WIM_IconFrameButton:SetScale(1);
 	end,
 	["MonkeyBuddyIconButton"] = function()
-		--MonkeyBuddyIconButton:SetScale(0.75);
+		MonkeyBuddyIconButton:SetHeight(33);
+		MonkeyBuddyIconButton:SetWidth(33);
+	end,
+	["DPSMate_MiniMap"] = function()
+		DPSMate_MiniMap:SetScale(MBB_Options.Scale /100);
 	end
 };
 
@@ -388,6 +390,8 @@ function MBB_AddButton(name)
 	local show = false;
 	local child = getglobal(name);
 	
+	if not child then return end
+
 	if( MBB_Buttons[1] and MBB_Buttons[1] ~= name and getglobal(MBB_Buttons[1]):IsVisible() ) then
 		show = true;
 	end
