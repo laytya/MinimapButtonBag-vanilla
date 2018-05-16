@@ -42,7 +42,8 @@ MBB_Ignore = {
 	[16] = "QuestieNote",
 	[17] = "MetaMap",
 	[18] = "LootLinkMinimapButton",
-	[19] = "TimeManagerClockButton"
+	[19] = "TimeManagerClockButton",
+	[20] = "pfMiniMapPin"
 };
 
 MBB_IgnoreSize = {
